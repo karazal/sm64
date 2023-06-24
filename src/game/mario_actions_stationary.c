@@ -24,7 +24,7 @@ s32 check_common_idle_cancels(struct MarioState *m) {
     }
 
     if (m->input & INPUT_STOMPED) {
-        return set_mario_action(m, ACT_SHOCKWAVE_BOUNCE, 0);
+        return set_mario_action(m, ACT_START_CROUCHING, 0);
     }
 
     if (m->input & INPUT_A_PRESSED) {
@@ -49,7 +49,7 @@ s32 check_common_idle_cancels(struct MarioState *m) {
     }
 
     if (m->input & INPUT_B_PRESSED) {
-        return set_mario_action(m, ACT_PUNCHING, 0);
+        return set_mario_action(m, ACT_SHOCKWAVE_BOUNCE, 0);
     }
 
     if (m->input & INPUT_Z_DOWN) {
@@ -112,7 +112,7 @@ s32 act_idle(struct MarioState *m) {
     }
 
     if (!(m->actionArg & 1) && m->health < 0x300) {
-        return set_mario_action(m, ACT_PANTING, 0);
+        return set_mario_action(m, ACT_SHIVERING, 0);
     }
 
     if (check_common_idle_cancels(m)) {
@@ -121,9 +121,9 @@ s32 act_idle(struct MarioState *m) {
 
     if (m->actionState == 3) {
         if ((m->area->terrainType & TERRAIN_MASK) == TERRAIN_SNOW) {
-            return set_mario_action(m, ACT_SHIVERING, 0);
+            return set_mario_action(m, ACT_PANTING, 0);
         } else {
-            return set_mario_action(m, ACT_START_SLEEPING, 0);
+            return set_mario_action(m, ACT_IN_QUICKSAND, 0);
         }
     }
 
